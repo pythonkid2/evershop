@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: evershop
+  template:
+    metadata:
+      labels:
+        app: evershop
+    spec:
+      containers:
+      - name: app
+        image: evershop/evershop:latest
+        env:
+          - name: DB_HOST
+            value: database-service
+          - name: DB_PORT
+            value: "5432"
+          - name: DB_PASSWORD
+            value: postgres
+          - name: DB_USER
+            value: postgres
+          - name: DB_NAME
+            value: postgres
+        ports:
+        - containerPort: 3000
+
